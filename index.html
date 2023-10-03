@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Iterator Example</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    label {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px 0;
+      width: 300px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Iterator</h1>
+
+<label for="numbersInput">Enter numbers (comma-separated):</label>
+<input type="text" id="numbersInput" placeholder="e.g., 1, 2, 3, 4, 5">
+
+<button onclick="runIterator()">Run Iterator</button>
+
+<div id="result"></div>
+
+<script>
+  // Custom iterator function
+  function* squareIterator(numbers) {
+    for (const number of numbers) {
+      yield number * number;
+    }
+  }
+
+  function runIterator() {
+    const numbersInput = document.getElementById("numbersInput").value;
+    const numbersArray = numbersInput.split(',').map(Number);
+
+    // Create an iterator using the custom iterator function
+    const squaresIterator = squareIterator(numbersArray);
+
+    // Display the squared values
+    const resultContainer = document.getElementById("result");
+    resultContainer.innerHTML = ""; // Clear previous results
+    for (const square of squaresIterator) {
+      resultContainer.innerHTML += `<p>${square}</p>`;
+    }
+  }
+</script>
+
+</body>
+</html>
